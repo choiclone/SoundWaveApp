@@ -1,10 +1,8 @@
-wavesurfer를 통한 음성 파장 테스트 App
-
-React + wavesurfer
+Node Express API 서버
 
 1. git clone https://github.com/choiclone/SoundWaveApp.git
 
-2. cd SoundWaveApp
+2. cd SoundWaveApp/server
 
 3. npm i or yarn install
 
