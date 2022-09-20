@@ -97,7 +97,7 @@ const AudioPlayer = ({
                     <input
                         type='range'
                         min='1'
-                        max='100'
+                        max='200'
                         value={zoom}
                         onChange={handleZoomSlider}
                     />

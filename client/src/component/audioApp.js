@@ -44,9 +44,10 @@ const AudioApp = ({ fileURLs }) => {
                 progressColor: 'green',
                 autoCenter: true,
                 barGap: 2,
-                barWidth: 1,
+                barWidth: 0.5,
                 barRadius: 1,
                 cursorWidth: 3,
+                height: 200,
                 cursorColor: "red",
                 skipLength: 5,
                 plugins: [
