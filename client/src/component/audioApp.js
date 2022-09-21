@@ -1,10 +1,11 @@
-import WaveSurfer from "wavesurfer.js";
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import TimelinePlugin from 'wavesurfer.js/dist/plugin/wavesurfer.timeline.min.js';
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
 import { FileContext } from '../contexts/fileContext';
 import { TimeString, test } from '../script/FuncExport';
 
+import WaveSurfer from "wavesurfer.js";
+import TimelinePlugin from 'wavesurfer.js/dist/plugin/wavesurfer.timeline.min.js';
 import AudioPlayer from "./audioPlayer";
 
 const AudioApp = ({ fileURLs }) => {
@@ -20,6 +21,12 @@ const AudioApp = ({ fileURLs }) => {
     const waveformRef = useRef(null);
     const timeformRef = useRef(null);
     const IntervalRef = useRef(null);
+    const {
+        transcript,
+        listening,
+        resetTranscript,
+        browserSupportsSpeechRecognition
+    } = useSpeechRecognition();
 
     useEffect(() => {
         return () => clearInterval(IntervalRef.current);
@@ -146,6 +153,12 @@ const AudioApp = ({ fileURLs }) => {
         }
     }
 
+    const testSpeech = () => {
+        if (!browserSupportsSpeechRecognition) {
+            return <span>Browser doesn't support speech recognition.</span>;
+        }
+    }
+
     return (
         <div className="App">
             <AudioPlayer
@@ -163,6 +176,14 @@ const AudioApp = ({ fileURLs }) => {
                 mutes={mutes}
                 volume={volume}
             />
+            <button onClick={testSpeech}>
+                test
+            </button>
+            <p>Microphone: {listening ? 'on' : 'off'}</p>
+            <button onClick={SpeechRecognition.startListening}>Start</button>
+            <button onClick={SpeechRecognition.stopListening}>Stop</button>
+            <button onClick={resetTranscript}>Reset</button>
+            <p>{transcript}</p>
         </div>
     );
 }
